@@ -48,25 +48,27 @@ function selectCells(selector) {
 //Attivazione colore al click
 function activateCell(selector, arrayRandomNumber) {
     const cells = selectCells(selector)
-    const cella = document.querySelector(".cells")
-    let element_n = cella.value;
-    
     for (let i = 0; i < cells.length; i++) {
         const cell = cells[i];
+
         cell.addEventListener('click', function () {
-            let elementoCella = i + 1;
+            let elementoCella = parseInt(this.innerHTML);
+            let differenza = elementoCella - cell;
             if (arrayRandomNumber.includes(elementoCella)) {
                 cell.classList.add("bomb")
                 cell.classList.remove("selected")
                 cell.innerHTML = `<i class="fa-solid fa-bomb"></i>`
-            } else {
                 
+                return alert("GAME OVER");
+
+            } else {
                 cell.classList.add("selected")
             }
             console.log(arrayRandomNumber);
         })
     }
 }
+
 
 /* GENERARE LE FUNCTION DOPO IL CLICK */
 
@@ -82,7 +84,7 @@ elementButton.addEventListener("click", function () {
         //Invoca la funzione per creare la griglia con i numeri
         generateGrid(row_lenght, cols_lenght, '.cells', "div", "cell")
         //Invoca la funzione per far colorare la cella di celeste
-        activateCell('.cell', arrayRandomNumber)
+        activateCell('.cell', arrayRandomNumber, row_lenght, cols_lenght)
         //Invoca la funzione per creare un array di numeri in base alla difficoltà scelta dall'utente
         arrayCreatedCasual(1, row_lenght)
 
