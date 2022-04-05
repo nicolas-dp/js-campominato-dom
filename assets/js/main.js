@@ -43,21 +43,27 @@ function selectCells(selector) {
     return cells
 }
 
-let numeriRandomici = arrayRandomNumber;
+
 
 //Attivazione colore al click
-function activateCell(selector, numeriRandomici) {
+function activateCell(selector, arrayRandomNumber) {
     const cells = selectCells(selector)
+    const cella = document.querySelector(".cells")
+    let element_n = cella.value;
+    
     for (let i = 0; i < cells.length; i++) {
         const cell = cells[i];
         cell.addEventListener('click', function () {
-            let elementoCella = [i + 1];
-            if (numeriRandomici.includes(elementoCella)) {
-
-                console.log("BOMBA");
-                return 0;
-            } 
-
+            let elementoCella = i + 1;
+            if (arrayRandomNumber.includes(elementoCella)) {
+                cell.classList.add("bomb")
+                cell.classList.remove("selected")
+                cell.innerHTML = `<i class="fa-solid fa-bomb"></i>`
+            } else {
+                
+                cell.classList.add("selected")
+            }
+            console.log(arrayRandomNumber);
         })
     }
 }
