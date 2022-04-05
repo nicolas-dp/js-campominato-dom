@@ -27,25 +27,37 @@ function generateGrid(row_lenght, cols_lenght, selector, element_name, class_nam
         cell.style.width = `calc(100% / ${cols_lenght})`
         cellsElement.append(cell)
         gridNumbers.push(i)
-
     }
 
-    return console.log(gridNumbers);
+    return gridNumbers;
 
 }
+
+
+
+
+
 
 function selectCells(selector) {
     const cells = document.querySelectorAll(selector)
     return cells
 }
 
+let numeriRandomici = arrayRandomNumber;
+
 //Attivazione colore al click
-function activateCell(selector) {
+function activateCell(selector, numeriRandomici) {
     const cells = selectCells(selector)
-    for (let index = 0; index < cells.length; index++) {
-        const cell = cells[index];
+    for (let i = 0; i < cells.length; i++) {
+        const cell = cells[i];
         cell.addEventListener('click', function () {
-            cell.classList.add("selected")
+            let elementoCella = [i + 1];
+            if (numeriRandomici.includes(elementoCella)) {
+
+                console.log("BOMBA");
+                return 0;
+            } 
+
         })
     }
 }
@@ -64,12 +76,12 @@ elementButton.addEventListener("click", function () {
         //Invoca la funzione per creare la griglia con i numeri
         generateGrid(row_lenght, cols_lenght, '.cells', "div", "cell")
         //Invoca la funzione per far colorare la cella di celeste
-        activateCell('.cell', 'selected')
+        activateCell('.cell', arrayRandomNumber)
         //Invoca la funzione per creare un array di numeri in base alla difficoltà scelta dall'utente
         arrayCreatedCasual(1, row_lenght)
 
         //console.log(controlNumberArray(1, row_lenght));
-        controlNumberArray(1, row_lenght)
+
     } else if (option_value == 2) {
         row_lenght = 81;
         cols_lenght = 9;
@@ -77,7 +89,7 @@ elementButton.addEventListener("click", function () {
         //Invoca la funzione per creare la griglia con i numeri
         generateGrid(row_lenght, cols_lenght, '.cells', "div", "cell")
         //Invoca la funzione per far colorare la cella di celeste
-        activateCell('.cell', 'selected')
+        activateCell('.cell', numeriRandomici)
         //Invoca la funzione per creare un array di numeri in base alla difficoltà scelta dall'utente
         arrayCreatedCasual(1, row_lenght)
     } else {
@@ -87,7 +99,7 @@ elementButton.addEventListener("click", function () {
         //Invoca la funzione per creare la griglia con i numeri
         generateGrid(row_lenght, cols_lenght, '.cells', "div", "cell")
         //Invoca la funzione per far colorare la cella di celeste
-        activateCell('.cell', 'selected')
+        activateCell('.cell', numeriRandomici)
         //Invoca la funzione per creare un array di numeri in base alla difficoltà scelta dall'utente
         arrayCreatedCasual(1, row_lenght)
     }
@@ -124,29 +136,6 @@ function arrayCreatedCasual(min, max) {
             arrayRandomNumber.push(randomNumber)
         }
     }
-    console.log(arrayRandomNumber);
+
     return arrayRandomNumber;
 }
-
-
-
-
-//Controllo numeri presenti nell'array 
-function controlNumberArray(min, row_lenght) {
-    //arrayCreatedCasual(min, max)
-
-    for (let i = 0; i < row_lenght; i++) {
-        
-        if (arrayRandomNumber[i]== gridNumbers[i]) {
-
-            console.log("Bomba");
-            console.log(arrayRandomNumber);
-            console.log(gridNumbers);
-            //console.log(true);
-        } 
-    
-}
-
-}
-    
-
