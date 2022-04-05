@@ -27,11 +27,11 @@ function generateGrid(row_lenght, cols_lenght, selector, element_name, class_nam
         cell.style.width = `calc(100% / ${cols_lenght})`
         cellsElement.append(cell)
         gridNumbers.push(i)
-        
+
     }
-    
+
     return console.log(gridNumbers);
-    
+
 }
 
 function selectCells(selector) {
@@ -44,7 +44,7 @@ function activateCell(selector) {
     const cells = selectCells(selector)
     for (let index = 0; index < cells.length; index++) {
         const cell = cells[index];
-           cell.addEventListener('click', function () {
+        cell.addEventListener('click', function () {
             cell.classList.add("selected")
         })
     }
@@ -60,35 +60,36 @@ elementButton.addEventListener("click", function () {
     if (option_value == 1) {
         row_lenght = 100;
         cols_lenght = 10;
-        
+
         //Invoca la funzione per creare la griglia con i numeri
         generateGrid(row_lenght, cols_lenght, '.cells', "div", "cell")
         //Invoca la funzione per far colorare la cella di celeste
         activateCell('.cell', 'selected')
         //Invoca la funzione per creare un array di numeri in base alla difficoltà scelta dall'utente
-        arrayCreatedCasual(1,row_lenght)
+        arrayCreatedCasual(1, row_lenght)
 
-        console.log(controlNumberArray(1,row_lenght));
+        //console.log(controlNumberArray(1, row_lenght));
+        controlNumberArray(1, row_lenght)
     } else if (option_value == 2) {
         row_lenght = 81;
         cols_lenght = 9;
 
-         //Invoca la funzione per creare la griglia con i numeri
-        generateGrid(row_lenght, cols_lenght, '.cells', "div", "cell")
-        //Invoca la funzione per far colorare la cella di celeste
-        activateCell('.cell', 'selected')
-        //Invoca la funzione per creare un array di numeri in base alla difficoltà scelta dall'utente
-        arrayCreatedCasual(1,row_lenght)
-    } else {
-        row_lenght = 49;
-        cols_lenght = 7;
-        
         //Invoca la funzione per creare la griglia con i numeri
         generateGrid(row_lenght, cols_lenght, '.cells', "div", "cell")
         //Invoca la funzione per far colorare la cella di celeste
         activateCell('.cell', 'selected')
         //Invoca la funzione per creare un array di numeri in base alla difficoltà scelta dall'utente
-        arrayCreatedCasual(1,row_lenght)
+        arrayCreatedCasual(1, row_lenght)
+    } else {
+        row_lenght = 49;
+        cols_lenght = 7;
+
+        //Invoca la funzione per creare la griglia con i numeri
+        generateGrid(row_lenght, cols_lenght, '.cells', "div", "cell")
+        //Invoca la funzione per far colorare la cella di celeste
+        activateCell('.cell', 'selected')
+        //Invoca la funzione per creare un array di numeri in base alla difficoltà scelta dall'utente
+        arrayCreatedCasual(1, row_lenght)
     }
 })
 
@@ -110,11 +111,11 @@ cioè il numero di volte che l’utente ha cliccato su una cella che non era una
 //Dobbiamo generare 16 numeri casuali in base al livello scelto
 
 function getRandomInteger(min, max) {
-    return Math.floor(Math.random() * (max - min + 1) ) + min;
-  }
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+}
 
 
-function arrayCreatedCasual(min,max) {
+function arrayCreatedCasual(min, max) {
     for (let i = 1; i <= 16; i++) {
         const randomNumber = getRandomInteger(min, max)
 
@@ -131,34 +132,21 @@ function arrayCreatedCasual(min,max) {
 
 
 //Controllo numeri presenti nell'array 
- function controlNumberArray(min,max) {
-    arrayCreatedCasual(min,max) 
-    
-    if (arrayRandomNumber == gridNumbers) {
+function controlNumberArray(min, row_lenght) {
+    //arrayCreatedCasual(min, max)
 
-    console.log(arrayRandomNumber); 
-    console.log(gridNumbers);
-    console.log(true);
-    } else {
-    //console.log(arrayRandomNumber, gridNumbers); 
-    console.log(false);
-    }
+    for (let i = 0; i < row_lenght; i++) {
+        
+        if (arrayRandomNumber[i]== gridNumbers[i]) {
+
+            console.log("Bomba");
+            console.log(arrayRandomNumber);
+            console.log(gridNumbers);
+            //console.log(true);
+        } 
+    
 }
 
-//console.log(controlNumberArray(min,max)); 
-
-
-     
+}
     
-
-//console.log(controlNumberArray());
-
-
-
-
-
-
-
-
-
 
