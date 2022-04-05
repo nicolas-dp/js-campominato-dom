@@ -53,7 +53,6 @@ function activateCell(selector, arrayRandomNumber) {
 
         cell.addEventListener('click', function () {
             let elementoCella = parseInt(this.innerHTML);
-            let differenza = elementoCella - cell;
             if (arrayRandomNumber.includes(elementoCella)) {
                 cell.classList.add("bomb")
                 cell.classList.remove("selected")
@@ -73,6 +72,7 @@ function activateCell(selector, arrayRandomNumber) {
 /* GENERARE LE FUNCTION DOPO IL CLICK */
 
 const elementButton = document.querySelector('.btn_genera');
+const elementButtonClear = document.querySelector('.btn_clear');
 
 elementButton.addEventListener("click", function () {
     let option_value = document.getElementById("mylist").value;
@@ -112,6 +112,21 @@ elementButton.addEventListener("click", function () {
         arrayCreatedCasual(1, row_lenght)
     }
 })
+
+
+elementButtonClear.addEventListener("click", function () {
+    const cells = selectCells(".cells")
+    for (let i = 0; i < cells.length; i++) {
+        const cell = cells[i];
+        cell.innerHTML += "";
+        cell.classList.remove("selected")
+    }
+    
+    
+    
+})
+
+
 
 /* Il computer deve generare 16 numeri casuali nello stesso range della difficoltà 
 prescelta: le bombe :bomba:.
