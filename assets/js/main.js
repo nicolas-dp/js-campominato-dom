@@ -57,7 +57,7 @@ function activateCell(selector, arrayRandomNumber) {
             if (arrayRandomNumber.includes(elementoCella)) {
                 cell.classList.add("bomb")
                 cell.classList.remove("selected")
-                cell.innerHTML = `<i class="fa-solid fa-bomb"></i>`
+                cell.innerHTML = `<img src="https://a.slack-edge.com/production-standard-emoji-assets/13.0/google-medium/1f4a3@2x.png">`
                 
                 return alert("GAME OVER");
 
