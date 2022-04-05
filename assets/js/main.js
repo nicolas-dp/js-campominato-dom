@@ -7,6 +7,9 @@ con difficoltà 3 => tra 1 e 49
 Quando l'utente clicca su ogni cella, la cella cliccata si colora di azzurro.
 */
 
+let gridNumbers = [];
+let arrayRandomNumber = [];
+
 /**
  * 
  * @param {string} selector css selector
@@ -15,7 +18,7 @@ Quando l'utente clicca su ogni cella, la cella cliccata si colora di azzurro.
  */
 function generateGrid(row_lenght, cols_lenght, selector, element_name, class_name) {
     const cellsElement = document.querySelector(selector)
-    const gridNumbers = []
+    gridNumbers = []
     for (let i = 1; i <= row_lenght; i++) {
         const cell = document.createElement(element_name)
         cell.classList.add(class_name)
@@ -27,7 +30,8 @@ function generateGrid(row_lenght, cols_lenght, selector, element_name, class_nam
         
     }
     
-    return gridNumbers;
+    return console.log(gridNumbers);
+    
 }
 
 function selectCells(selector) {
@@ -40,15 +44,11 @@ function activateCell(selector) {
     const cells = selectCells(selector)
     for (let index = 0; index < cells.length; index++) {
         const cell = cells[index];
-        cell.addEventListener('click', function () {
+           cell.addEventListener('click', function () {
             cell.classList.add("selected")
         })
     }
-
-
 }
-
-
 
 /* GENERARE LE FUNCTION DOPO IL CLICK */
 
@@ -61,24 +61,104 @@ elementButton.addEventListener("click", function () {
         row_lenght = 100;
         cols_lenght = 10;
         
+        //Invoca la funzione per creare la griglia con i numeri
         generateGrid(row_lenght, cols_lenght, '.cells', "div", "cell")
+        //Invoca la funzione per far colorare la cella di celeste
         activateCell('.cell', 'selected')
+        //Invoca la funzione per creare un array di numeri in base alla difficoltà scelta dall'utente
+        arrayCreatedCasual(1,row_lenght)
 
+        console.log(controlNumberArray(1,row_lenght));
     } else if (option_value == 2) {
         row_lenght = 81;
         cols_lenght = 9;
-        
+
+         //Invoca la funzione per creare la griglia con i numeri
         generateGrid(row_lenght, cols_lenght, '.cells', "div", "cell")
+        //Invoca la funzione per far colorare la cella di celeste
         activateCell('.cell', 'selected')
-       
+        //Invoca la funzione per creare un array di numeri in base alla difficoltà scelta dall'utente
+        arrayCreatedCasual(1,row_lenght)
     } else {
         row_lenght = 49;
         cols_lenght = 7;
         
+        //Invoca la funzione per creare la griglia con i numeri
         generateGrid(row_lenght, cols_lenght, '.cells', "div", "cell")
+        //Invoca la funzione per far colorare la cella di celeste
         activateCell('.cell', 'selected')
-        
+        //Invoca la funzione per creare un array di numeri in base alla difficoltà scelta dall'utente
+        arrayCreatedCasual(1,row_lenght)
     }
-
 })
+
+/* Il computer deve generare 16 numeri casuali nello stesso range della difficoltà 
+prescelta: le bombe :bomba:.
+I numeri nella lista delle bombe non possono essere duplicati.
+In seguito l'utente clicca su una cella:
+se il numero è presente nella lista dei numeri generati - abbiamo calpestato una bomba
+la cella si colora di rosso e la partita termina,
+altrimenti la cella cliccata si colora di azzurro e 
+l'utente può continuare a cliccare sulle altre celle.
+La partita termina quando:
+ il giocatore clicca su una bomba
+o raggiunge il numero massimo possibile di numeri consentiti.
+Al termine della partita il software deve comunicare il punteggio, 
+cioè il numero di volte che l’utente ha cliccato su una cella che non era una bomba. */
+
+
+//Dobbiamo generare 16 numeri casuali in base al livello scelto
+
+function getRandomInteger(min, max) {
+    return Math.floor(Math.random() * (max - min + 1) ) + min;
+  }
+
+
+function arrayCreatedCasual(min,max) {
+    for (let i = 1; i <= 16; i++) {
+        const randomNumber = getRandomInteger(min, max)
+
+        //Unicità dei numeri nell'array
+        if (!arrayRandomNumber.includes(randomNumber)) {
+            arrayRandomNumber.push(randomNumber)
+        }
+    }
+    console.log(arrayRandomNumber);
+    return arrayRandomNumber;
+}
+
+
+
+
+//Controllo numeri presenti nell'array 
+ function controlNumberArray(min,max) {
+    arrayCreatedCasual(min,max) 
+    
+    if (arrayRandomNumber == gridNumbers) {
+
+    console.log(arrayRandomNumber); 
+    console.log(gridNumbers);
+    console.log(true);
+    } else {
+    //console.log(arrayRandomNumber, gridNumbers); 
+    console.log(false);
+    }
+}
+
+//console.log(controlNumberArray(min,max)); 
+
+
+     
+    
+
+//console.log(controlNumberArray());
+
+
+
+
+
+
+
+
+
 
