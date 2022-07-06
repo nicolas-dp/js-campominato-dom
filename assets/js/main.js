@@ -84,7 +84,7 @@ elementButton.addEventListener("click", function () {
 
         //console.log(controlNumberArray(1, row_lenght));
 
-    } else if (option_value == 2) {
+    } else if (option_value == 2) { 
         row_lenght = 81;
         cols_lenght = 9;
 
@@ -94,7 +94,7 @@ elementButton.addEventListener("click", function () {
         activateCell('.cell', arrayRandomNumber)
         //Invoca la funzione per creare un array di numeri in base alla difficoltà scelta dall'utente
         arrayCreatedCasual(1, row_lenght)
-    } else {
+    } else {        
         row_lenght = 49;
         cols_lenght = 7;
 
@@ -112,12 +112,11 @@ elementButtonClear.addEventListener("click", function () {
     const cells = selectCells(".cells")
     for (let i = 0; i < cells.length; i++) {
         const cell = cells[i];
-        cell.innerHTML += "";
+        
+        cell.innerHTML = "";
+        
         cell.classList.remove("selected")
     }
-
-
-
 })
 
 
@@ -156,3 +155,4 @@ function arrayCreatedCasual(min, max) {
 
     return arrayRandomNumber;
 }
+
