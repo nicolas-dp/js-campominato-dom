@@ -34,16 +34,10 @@ function generateGrid(row_lenght, cols_lenght, selector, element_name, class_nam
 }
 
 
-
-
-
-
 function selectCells(selector) {
     const cells = document.querySelectorAll(selector)
     return cells
 }
-
-
 
 //Attivazione colore al click
 function activateCell(selector, arrayRandomNumber) {
@@ -57,7 +51,7 @@ function activateCell(selector, arrayRandomNumber) {
                 cell.classList.add("bomb")
                 cell.classList.remove("selected")
                 cell.innerHTML = `<img src="https://a.slack-edge.com/production-standard-emoji-assets/13.0/google-medium/1f4a3@2x.png">`
-                
+
                 return alert("GAME OVER");
 
             } else {
@@ -97,7 +91,7 @@ elementButton.addEventListener("click", function () {
         //Invoca la funzione per creare la griglia con i numeri
         generateGrid(row_lenght, cols_lenght, '.cells', "div", "cell")
         //Invoca la funzione per far colorare la cella di celeste
-        activateCell('.cell', numeriRandomici)
+        activateCell('.cell', arrayRandomNumber)
         //Invoca la funzione per creare un array di numeri in base alla difficoltà scelta dall'utente
         arrayCreatedCasual(1, row_lenght)
     } else {
@@ -107,7 +101,7 @@ elementButton.addEventListener("click", function () {
         //Invoca la funzione per creare la griglia con i numeri
         generateGrid(row_lenght, cols_lenght, '.cells', "div", "cell")
         //Invoca la funzione per far colorare la cella di celeste
-        activateCell('.cell', numeriRandomici)
+        activateCell('.cell', arrayRandomNumber)
         //Invoca la funzione per creare un array di numeri in base alla difficoltà scelta dall'utente
         arrayCreatedCasual(1, row_lenght)
     }
@@ -121,9 +115,9 @@ elementButtonClear.addEventListener("click", function () {
         cell.innerHTML += "";
         cell.classList.remove("selected")
     }
-    
-    
-    
+
+
+
 })
 
 
